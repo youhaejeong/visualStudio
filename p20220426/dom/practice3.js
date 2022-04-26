@@ -1,4 +1,5 @@
 //p20220426 /dom/ practice3.js
+//dom중 최상위에 존재하는것 window
 let data = [{
   id: 101,
   name: '홍길동',
@@ -15,6 +16,15 @@ let data = [{
 document.addEventListener('DOMContentLoaded', callbackfunction);
 
 function callbackfunction() {
+console.log(window);
+window.document.children[0] //=>html
+window.document.children[0].children[1] //=>body
+window.document.children[0].children[1].children[0].innerHTML='요기요'; //h3
+
+let h3 =window.document.children[0].children[1].children[0];
+let newH3= document.createElement('h3');
+newH3.innerHTML ='여기요';
+h3.parentElement.appendChild(document.createElement('h3')); //append 하면 바디태그 젤 밑에 붙음
 
   //변수선언 
   let table, tr, th, td, thead, tbody, text;
@@ -72,6 +82,11 @@ function makeHead() {
   th.appendChild(text);
   tr.appendChild(th);
 
+  th = document.createElement('th');
+  text = document.createTextNode('기능');
+  th.appendChild(text);
+  tr.appendChild(th);
+
   thead.appendChild(tr);
 
   return thead;
@@ -90,9 +105,25 @@ function makeTr(obj) {
     td.appendChild(text);
     tr.appendChild(td);
   });
+  let btn = document.createElement('button'); //<button> 삭제 </button>
+  btn.innerHTML = '삭제';
+  btn.addEventListener('click', deleteCallBack) ;
+    // console.log(this); //event.target //이떄 this는 이벤트 대상을 가르킴 
+    // this.parentElement.parentElement.remove();
+    // // evnt.target.parentElement.parentElement.remove(); //버튼태그  //중요함 ;
+  let td = document.createElement('td');
+
+  td.appendChild(btn);
+  tr.appendChild(td);
 
   return tr;
 
+}
+
+function deleteCallBack() { //evnt 로 하고싶을때 deleteCallBack()안에 evnt를 넣으면 할수잇ㅁ음
+  // evnt.target.parentElement.parentElement.remove(); //버튼태그  //중요함 
+  console.log(this); //event.target //이떄 this는 이벤트 대상을 가르킴 
+  this.parentElement.parentElement.remove();
 }
 
 function makeBody(objAry) {

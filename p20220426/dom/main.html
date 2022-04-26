@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p20220426/dom/main.html</title>
+</head>
+
+<body>
+  <div id="addForm">
+    <form name="frm" action="../index.html" method="post" onsubmit="saveFnc(event)">
+      ID: <input type="text" name="uid" id="userId" value="101"><br>
+      NAME: <input type="text" name="uname" id="userName" value="홍길동"><br>
+      Score: <input type="text" name="uscore" id="userScore" value="80"><br>
+      Age:<input type="text" name="uage" id="userAge" value="19"><br>
+      <input type="submit" value="저장">
+    </form>
+  </div>
+  <div id="show">
+    <table border="1"> 
+      <thead>
+<tr>
+  <th>아이디</th>
+  <th>이름</th>
+  <th>점수</th>
+  <th>나이</th>
+</tr>
+</thead>
+<tbody id="body">
+
+</tbody>
+    </table>
+  </div>
+  <script>
+    // console.log(document.forms['frm'].elements['uid'].value); //배열안에 지정은 순번과 이름으로 해도 상관없음 
+    function saveFnc(e) {
+      e.preventDefault(); //기본 기능을 차단  //페이지 못넘어가게 막음
+let id =document.forms['frm'].elements['uid'].value;
+let name =document.forms['frm'].elements['uname'].value;
+let score =document.forms['frm'].elements['uscore'].value;
+let age =document.forms['frm'].elements['uage'].value
+
+let person={}
+person.id =id;
+person.name =name;
+person.score=score;
+person.age= age;
+
+document.getElementById('body').appendChild(person);
+
+    }
+
+    function makeTr(obj){
+let tr = document.createElement('tr');
+let td = document.createElement('td');
+td.innerHTML = id;
+tr.appendChild(td);
+
+    }
+  </script>
+</body>
+
+</html>
